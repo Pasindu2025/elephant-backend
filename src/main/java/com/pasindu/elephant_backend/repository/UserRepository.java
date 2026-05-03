@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
     // check whther have any user mach username and password
     User findByUsernameAndPassword(String username, String password);
+    User findByEmail(String email);
 }
