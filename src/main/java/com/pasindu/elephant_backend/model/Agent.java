@@ -3,7 +3,6 @@ package com.pasindu.elephant_backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
 @Entity
 @Data
 @Table(name = "agent")
@@ -21,4 +20,6 @@ public class Agent {
     private String assignedArea;
 
 
+    private String username;
+    private String password;
 }
