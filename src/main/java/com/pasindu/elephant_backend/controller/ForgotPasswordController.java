@@ -20,15 +20,15 @@ public class ForgotPasswordController {
                                                    @RequestParam("newPassword") String newPassword) {
 
         System.out.println("Received Email from UI: [" + email + "]");
-        User user = userRepository.findByEmail(email.trim());
+        User user = userRepository.findByEmail(email.trim()); //find user from using email
         if (user == null) {
             System.out.println("User not found in Database for email: " + email);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found!");
         }
 
-        // Password එක update කරනවා
+        // Password update
         user.setPassword(newPassword);
-        userRepository.save(user);
+        userRepository.save(user); //password save
 
         return ResponseEntity.ok("Password updated successfully!");
     }

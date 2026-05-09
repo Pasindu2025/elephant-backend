@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2026 at 03:31 PM
+-- Generation Time: May 06, 2026 at 08:15 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `active_alerts`
+--
+
+CREATE TABLE `active_alerts` (
+  `id` bigint(20) NOT NULL,
+  `added_at` datetime(6) DEFAULT NULL,
+  `latitude` double DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
+  `place_name` varchar(255) DEFAULT NULL,
+  `threat_level` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `active_alerts`
+--
+
+INSERT INTO `active_alerts` (`id`, `added_at`, `latitude`, `longitude`, `place_name`, `threat_level`) VALUES
+(1, '2026-05-06 23:31:25.000000', 8.257701, 81.043396, 'Unknown', NULL),
+(2, '2026-05-06 23:32:47.000000', 8.072827, 81.068115, 'Unknown', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `agent`
 --
 
@@ -34,8 +57,41 @@ CREATE TABLE `agent` (
   `contact_number` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `employee_id` varchar(255) DEFAULT NULL,
-  `full_name` varchar(255) DEFAULT NULL
+  `full_name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `agent`
+--
+
+INSERT INTO `agent` (`id`, `address`, `assigned_area`, `contact_number`, `email`, `employee_id`, `full_name`, `password`, `username`) VALUES
+(1, 'Matara, Sri Lanka', 'Yala National Park', '0771234567', 'oyage_thawa_email_ekak@gmail.com', 'AG001', 'Pasindu Lakshan', '0yK44CcIi8', 'pasindulakshan_ac50'),
+(2, 'Mathara', 'Thangalla', '8758758758', 'pasindu@gmail.com', '1', 'Pasinsdu', 'iE1zr6hcum', 'pasinsdu_9341'),
+(3, 'Rathnapura', 'Rakvana', '0786754342', 'lmadhuranga132@gmail.com', '2', 'Lakshan', 'qQ$cZu@Uii', 'lakshan_730b'),
+(4, 'sadwadasfawfa', 'rathnapura', '65445', 'sachithrehan578@gmail.com', '01111', 'sachith', 'ERPa105RVN', 'sachith_5581');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `danger_areas`
+--
+
+CREATE TABLE `danger_areas` (
+  `id` bigint(20) NOT NULL,
+  `added_at` datetime(6) DEFAULT NULL,
+  `area_name` varchar(255) DEFAULT NULL,
+  `coordinates` text NOT NULL,
+  `threat_level` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `danger_areas`
+--
+
+INSERT INTO `danger_areas` (`id`, `added_at`, `area_name`, `coordinates`, `threat_level`) VALUES
+(1, '2026-05-06 23:31:58.000000', 'Danger Zone', '[{\"lat\": 7.901131, \"lon\": 80.850449},{\"lat\": 7.901131, \"lon\": 80.850449},{\"lat\": 7.907252, \"lon\": 80.882378},{\"lat\": 7.882427, \"lon\": 80.888557},{\"lat\": 7.869844, \"lon\": 80.862122}]', NULL);
 
 -- --------------------------------------------------------
 
@@ -80,7 +136,8 @@ INSERT INTO `fence` (`id`, `created_by`, `latitude`, `longitude`, `place_name`, 
 (23, 'system', 6.433, 81.133, 'Thanamalwila Elephant Area', 'OK'),
 (24, 'system', 8.2667, 80.2, 'Nochchiyagama Risk Village', 'OK'),
 (25, 'system', 8.6333, 80.3333, 'Kebithigollewa Risk Area', 'OK'),
-(26, 'system', 8.1333, 80.75, 'Medirigiriya Elephant Area', 'OK');
+(26, 'system', 8.1333, 80.75, 'Medirigiriya Elephant Area', 'OK'),
+(27, 'WILDLIFE', 7.694661, 81.362, 'Custom Location55', 'ELECTRIC FAILURE');
 
 -- --------------------------------------------------------
 
@@ -145,9 +202,21 @@ INSERT INTO `users` (`id`, `email`, `full_name`, `password`, `username`) VALUES
 --
 
 --
+-- Indexes for table `active_alerts`
+--
+ALTER TABLE `active_alerts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `agent`
 --
 ALTER TABLE `agent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `danger_areas`
+--
+ALTER TABLE `danger_areas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -167,16 +236,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `active_alerts`
+--
+ALTER TABLE `active_alerts`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `agent`
 --
 ALTER TABLE `agent`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `danger_areas`
+--
+ALTER TABLE `danger_areas`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `fence`
 --
 ALTER TABLE `fence`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
