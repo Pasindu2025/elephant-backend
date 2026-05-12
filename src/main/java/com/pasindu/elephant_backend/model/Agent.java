@@ -9,6 +9,7 @@ import lombok.Data;
 public class Agent {
 
     @Id
+
     private String id;
 
     private String fullName;
@@ -16,7 +17,6 @@ public class Agent {
     private String email;
     private String address;
     private String assignedArea;
-
 
     private String username;
     private String password;
