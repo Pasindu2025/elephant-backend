@@ -23,4 +23,11 @@ public class InjuredElephantController {
     public InjuredElephant reportInjury(@RequestBody InjuredElephant entry) {
         return repository.save(entry);
     }
+
+    @CrossOrigin // Java Swing එකෙන් එන Request බාරගන්න මේක තියෙන්නම ඕනේ
+    @DeleteMapping("/remove")
+    public void deleteInjured(@RequestParam double lat, @RequestParam double lon) {
+        System.out.println("Request received to remove injured elephant from DB at: " + lat + ", " + lon);
+        repository.deleteByCoordinates(lat, lon); // Repository එකේ Custom Query එකට කෝල් කරනවා
+    }
 }
